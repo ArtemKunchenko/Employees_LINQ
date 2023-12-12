@@ -24,5 +24,18 @@
             ManagerId = managerId;
             DepartmentId = departmentId;
         }
+        public override string ToString()
+        {
+            string data = $"ID: {EmployeeId}\t" +
+                $"{FirstName} " +
+                $"{LastName}, " +
+                $"{PhoneNumber} " +
+                $"Salary: ${Salary} " +
+                $"Bonus: ${CommissionPct} " +
+                $"Job ID: {JobId} " +
+                $"Manager ID: {ManagerId} " +
+                $"Department ID: {DepartmentId}\n";
+            return data;
+        }
     }
 }

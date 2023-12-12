@@ -82,7 +82,7 @@ namespace Employees_LINQ
             Employee employee11 = new Employee(11, "Oliver", "Harris", "093-123-4567", 9, 6900, 700, 3, 3);
             Employee employee12 = new Employee(12, "Isabella", "Clark", "067-234-5678", 9, 4800, 0, 3, 3);
             Employee employee13 = new Employee(13, "Elijah", "Walker", "050-345-6789", 7, 2500, 0, 3, 3);
-            Employee employee14 = new Employee(14, "Scarlett", "Moore", "066-456-7890", 7, 2900, 0, 3, 3);
+            Employee employee14 = new Employee(14, "Henry", "Moore", "066-456-7890", 7, 2900, 0, 3, 3);
 
             List<Employee> employees = new List<Employee>();
             employees.Add(employee1);
@@ -98,11 +98,146 @@ namespace Employees_LINQ
             employees.Add(employee11);
             employees.Add(employee12);
             employees.Add(employee13);
-            employees.Add(employee14); 
+            employees.Add(employee14);
             #endregion
 
+            //a)	Получить список с информацией обо всех сотрудниках
+            //var query = from e in employees
+            //            orderby e.EmployeeId
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
 
+            //b)	Получить список всех сотрудников с именем 'Henry'
+            //var query = from e in employees
+            //                     where e.FirstName == "Henry"
+            //            orderby e.LastName
+            //            select e;            
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
 
+            //c)	Получить список всех сотрудников с JobId равным '7'
+            //var query = from e in employees
+            //                          where e.JobId == 7
+            //                          select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //d)	Получить список всех сотрудников из 1 отдела (DepartmentId) с зарплатой(salary), большей 5000
+            //var query = from e in employees
+            //            where e.DepartmentId == 1 && e.Salary > 5000
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //e)	Получить список всех сотрудников из 1 и из 3 отдела (DepartmentId)
+            //var query = from e in employees
+            //            where e.DepartmentId == 1 || e.DepartmentId == 3
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //f)	Получить список всех сотрудников у которых последняя буква в имени равна 'a'
+            //var query = from e in employees
+            //            where e.FirstName.EndsWith("a")
+            //            orderby e.FirstName
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //g)	Получить список всех сотрудников из 1 и из 2 отдела (DepartmentId) у которых есть бонус (значение в колонке CommissionPct не равно 0)
+            //var query = from e in employees
+            //            where (e.DepartmentId == 1 || e.DepartmentId == 2) && e.CommissionPct != 0
+            //            orderby e.CommissionPct
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //h)	Получить список всех сотрудников у которых в имени содержатся минимум 2 буквы 'n'
+            //var query = from e in employees
+            //            where e.FirstName.Count(c => c == 'n') >= 2
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //i)	Получить список всех сотрудников у которых зарплата находится в промежутке от 4500 до 5500 (включительно)
+            //var query = from e in employees
+            //            where e.Salary >= 4500 && e.Salary <= 5500
+            //            orderby e.Salary
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //j)	Получить список всех сотрудников у которых в имени содержится символ 'j'
+            //var query = from e in employees
+            //            where e.FirstName.Contains('j')
+            //            orderby e.EmployeeId
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //k)	Получить список всех ID менеджеров
+            //var query = (from e in employees where e.ManagerId !=0 select e.ManagerId).Distinct();
+            //foreach (var id in query)
+            //{
+            //    Console.WriteLine($"Manager ID: {id}");
+            //}
+
+            //l)	Получить список всех сотрудников у которых длина имени больше 6 букв
+            //var query = from e in employees
+            //            where e.FirstName.Length > 6
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //m)	Получить список всех сотрудников у которых в имени есть буква 'b' (без учета регистра)
+            //var query = from e in employees
+            //            where e.FirstName.Contains("b", StringComparison.OrdinalIgnoreCase)                        
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //n)	Получить список всех сотрудников у которых в имени содержатся минимум 2 буквы 'a'
+            //var query = from e in employees
+            //            where e.FirstName.Count(c => c == 'a') >= 2
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //o)	Получить список всех сотрудников зарплата которых кратна 1000
+            var query = from e in employees
+                        where e.Salary % 1000 == 0
+                        select e;
+            foreach (var employee in query)
+            {
+                Console.WriteLine(employee);
+            }
 
 
             Console.ReadKey();
