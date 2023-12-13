@@ -69,7 +69,7 @@ namespace Employees_LINQ
             #endregion
 
             #region EMPLOYEE
-            Employee employee1 = new Employee(1, "Alexander", "Mitchel", "050-123-4567", 1, 15000, 500, 0, 1);
+            Employee employee1 = new Employee(1, "Alexander", "Mitchel", "095-123-45-67", 1, 15000, 500, 0, 1);
             Employee employee2 = new Employee(2, "Olivia", "Johnson", "066-234-5678", 5, 12000, 200, 0, 2);
             Employee employee3 = new Employee(3, "Benjamin", "Turner", "093-345-6789", 8, 13000, 300, 0, 3);
             Employee employee4 = new Employee(4, "Sophia", "Reynolds", "067-456-7890", 2, 8500, 100, 1, 1);
@@ -231,12 +231,122 @@ namespace Employees_LINQ
             //}
 
             //o)	Получить список всех сотрудников зарплата которых кратна 1000
+            //var query = from e in employees
+            //            where e.Salary % 1000 == 0
+            //            select e;
+            //foreach (var employee in query)
+            //{
+            //    Console.WriteLine(employee);
+            //}
+
+            //p)	Получить первое 3х значное число телефонного номера сотрудника если его номер в формате ХХХ-ХХХ-ХХ-ХХ
+            //var query = from e in employees
+            //            let phoneNumberParts = e.PhoneNumber.Split('-')
+            //            where phoneNumberParts.Length == 4
+            //            select e.PhoneNumber;
+            //foreach (var p in query)
+            //{
+            //    Console.WriteLine(p.Substring(0,3));
+            //}
+
+            //q)	Получить первое слово из имени департамента для тех у кого в названии больше одного слова
+            //var query = from d in departments
+            //            where d.DepartmentName.Split(' ').Length > 1
+            //            select d.DepartmentName.Split(' ').First();
+            //r)	Получить имена сотрудников без первой и последней буквы в имени
+
+            //r)	Получить имена сотрудников без первой и последней буквы в имени
+            //var query =from e in employees select e.FirstName;
+            //foreach (var name in query)
+            //{
+            //    int lenght=name.Length;
+            //    Console.WriteLine(name.Substring(1, lenght-2));
+            //}
+
+            //s)	Получить список всех сотрудников у которых последняя буква в имени равна 'r' и длинной имени большей 5ти
+            //var query = from e in employees
+            //            where e.FirstName.Length > 5 && e.FirstName.EndsWith("r")
+            //            select e.FirstName;
+            //foreach (var name in query)
+            //{               
+            //    Console.WriteLine(name);
+            //}
+
+            //t)	Получить город в котором сотрудники в сумме зарабатывают меньше всех.
+            //var query = (from l in locations
+            //             let totalSalary = (from d in departments
+            //                                where d.LocationId == l.LocationId
+            //                                join employee in employees on d.DepartmentId equals employee.DepartmentId
+            //                                select employee.Salary).Sum()
+            //             where totalSalary > 0
+            //             orderby totalSalary
+            //             select new
+
+            //             {
+            //                 City = l.City,
+            //                 TotalSalary = totalSalary
+            //             }
+            //             ).FirstOrDefault();
+            //Console.WriteLine(query.City);
+
+            //u)	Получить список сотрудников у которых менеджер получает зарплату больше 14000.
+            //var query = (from e in employees
+            //             where e.ManagerId != 0
+            //             join manager in employees on e.ManagerId equals manager.EmployeeId
+            //             where manager.Salary > 14000
+            //             select new
+            //             {
+            //                 EmployeeId = e.EmployeeId,
+            //                 FirstName = e.FirstName,
+            //                 LastName = e.LastName,
+            //                 ManagerSalary = manager.Salary
+            //             });
+            //foreach (var e in query)
+            //{
+            //    Console.WriteLine($"ID: {e.EmployeeId} {e.FirstName} {e.LastName}");
+            //}
+
+            //v)	Показать все департаменты в которых нет ни одного сотрудника
+            //var query = from d in departments
+            //            where !employees.Any(employee => employee.DepartmentId == d.DepartmentId)
+            //            select d;
+            //foreach (var d in query)
+            //{
+            //    Console.WriteLine(d.DepartmentName);
+            //}
+
+            //w)	Показать всех сотрудников которые не являются менеджерами
+            //var query = from e in employees
+            //            where e.ManagerId !=0
+            //            orderby e.EmployeeId
+            //            select e;
+            //foreach (var e in query)
+            //{
+            //    Console.WriteLine(e);
+            //}
+
+            //x)	Показать всех менеджеров которые имеют в подчинении больше 3ти сотрудников
+            //var query = from manager in employees
+            //            where manager.ManagerId == 0
+            //            where (
+            //                from subordinate in employees
+            //                where subordinate.ManagerId == manager.EmployeeId
+            //                select subordinate
+            //                ).Count() > 3
+            //            select manager;
+            //foreach (var manager in query)
+            //{
+            //    Console.WriteLine($"ID: {manager.EmployeeId} {manager.FirstName} {manager.LastName}");
+            //}
+
+            //y)	Показать сотрудников которые работают в департаменте IT
             var query = from e in employees
-                        where e.Salary % 1000 == 0
+                        from d in departments
+                        where d.DepartmentId == e.DepartmentId && d.DepartmentName == "IT"
                         select e;
-            foreach (var employee in query)
+            foreach (var e in query)
             {
-                Console.WriteLine(employee);
+                Console.WriteLine(e);
             }
 
 
